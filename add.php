@@ -1,7 +1,8 @@
 <?php
-    include ('login.php');
-    
+    //**************************************************************************************************//
 
+
+    include ('login.php');
     if(isset($_POST['autor'])){   // Jesli jest ustawiona zmienna autor czyli jesli formularz zostal wyslany
 
         $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
@@ -11,11 +12,12 @@
 
             require("vendor/autoload.php");
 
-            $uid = uniqid();
+        //********************** Pobranie pliku obrazu **********************************//
+            $uid = uniqid();    // Funkcja nadaje unikalne ID
 
-            $ext = pathinfo( $_FILES['cover']['name'], PATHINFO_EXTENSION);
+            $ext = pathinfo( $_FILES['cover']['name'], PATHINFO_EXTENSION);     // Funkcja pobiera rozszerzenie pliku
 
-            $fileName = 'cover_' . $uid . '.' . $ext;
+            $fileName = 'cover_' . $uid . '.' . $ext;   // Nadawaanie nazwy + ID + rozszerzenie
             $imagine = new Imagine\Gd\Imagine();
             $size  = new Imagine\Image\Box(200, 200);
 
@@ -23,9 +25,9 @@
 
             $mode    = Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
 
-            $imagine->open($_FILES['cover']['tmp_name'])
+            $imagine->open($_FILES['cover']['tmp_name'])  // Otwarcie pliku
                 ->thumbnail($size, $mode)
-                ->save(__DIR__ . '/img/' . $fileName);
+                ->save(__DIR__ . '/img/' . $fileName);      // Zapisanie pliku
         }
 
 
