@@ -13,7 +13,7 @@ include('login.php');
 
     $count = $pdo->query('SELECT COUNT(id) as cnt FROM regal')->fetch()['cnt'];    // Liczymy ile mamy rekordow w bazie
 
-    $page = isset($_GET['page']) ? intval($_GET['page' ] - 1) : 1;  // Przekazujemy numer strony w zmienne $_GET ,jeśli nie jest ustawiona to otrzymuje wartosc 1
+    $page = isset($_GET['page']) ? intval($_GET['page' ] - 1) : 0;  // Przekazujemy numer strony w zmienne $_GET ,jeśli nie jest ustawiona to otrzymuje wartosc 1
 
     $limit = 10;                     // Limit rekordów na stronę
 
@@ -40,6 +40,7 @@ echo '<table border="1">';
 
         echo '<th>ID</th>';
         echo '<th>Tytuł</th>';
+        echo '<th>Okładka</th>';
         echo '<th>Kategoria</th>';
         echo '<th>Autor</th>';
         echo '<th>Recenzja</th>';
@@ -55,6 +56,13 @@ echo '<table border="1">';
         echo '<tr>';
             echo '<td>'.$value['ID'].'</td>';
             echo '<td>'.$value['Tytul'].'</td>';
+            echo '<td>';
+                if($value['cover']){                            // Jesli istnieje okladka to ja wyswietl
+                    echo '<img src="img/'. $value['cover'] .'">';
+                }else{
+                    echo "Brak okładki";
+                }
+            echo '</td>';
             echo '<td>'.$value['name'].'</td>';
             echo '<td>'.$value['Autor'].'</td>';
             echo '<td>'.$value['Recenzja'].'</td>';
@@ -84,4 +92,3 @@ echo '<table border="1">';
         echo '<a href="loop.php?page='.$allPage.'"> ostatnia strona ></a>';
     }
 
-    echo $page;

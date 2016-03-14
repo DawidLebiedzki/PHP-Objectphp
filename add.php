@@ -21,7 +21,7 @@ if (isset($_POST['autor'])) {   // Jesli jest ustawiona zmienna autor czyli jesl
 
         $fileName = 'cover_' . $uid . '.' . $ext;   // Nadawaanie nazwy + ID + rozszerzenie
         $imagine = new Imagine\Gd\Imagine();
-        $size = new Imagine\Image\Box(200, 200);
+        $size = new Imagine\Image\Box(120, 120);
 
         //$mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
 
